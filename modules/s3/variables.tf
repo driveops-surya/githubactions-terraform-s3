@@ -109,7 +109,7 @@ variable "website_config" {
 }
 
 variable "bucket_policy" {
-  description = "The JSON policy for the S3 bucket"
+  description = "The JSON policy for the S3 bucket. Note: If applying a public policy, ensure public access blocks are disabled."
   type        = string
   default     = null
 }

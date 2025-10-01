@@ -104,6 +104,7 @@ module "website_s3_bucket" {
   bucket_name = "my-website-bucket-unique-suffix"
 
   # Disable public access blocks for website hosting
+  # IMPORTANT: These must be set to false BEFORE applying a public bucket policy
   block_public_acls       = false
   block_public_policy     = false
   ignore_public_acls      = false
@@ -127,6 +128,8 @@ module "website_s3_bucket" {
   })
 }
 ```
+
+> **Note**: The module automatically handles the timing issue between public access block settings and bucket policies by adding a delay resource. This ensures public access blocks are updated before applying public policies.
 
 ## Input Variables
 
@@ -221,6 +224,25 @@ Set up the following in your GitHub repository secrets:
    ```bash
    terraform apply
    ```
+
+## Troubleshooting
+
+### Public Bucket Policy Errors
+
+If you encounter errors like:
+```
+api error AccessDenied: User is not authorized to perform: s3:PutBucketPolicy because public policies are blocked by the BlockPublicPolicy
+```
+
+**Solution**: The module now automatically handles this by:
+1. Configuring public access block settings first
+2. Adding a time delay to ensure settings take effect
+3. Then applying the bucket policy
+
+If you still encounter issues:
+1. Ensure all public access block variables are set to `false` for public buckets
+2. Run `terraform apply` again - the delay should resolve timing issues
+3. For manual troubleshooting, you can disable public access blocks first, then apply the policy in a separate run
 
 ## Best Practices Implemented
 

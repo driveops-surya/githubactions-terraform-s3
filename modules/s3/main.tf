@@ -130,11 +130,21 @@ resource "aws_s3_bucket_website_configuration" "this" {
   }
 }
 
+# Time delay to ensure public access block settings take effect
+resource "time_sleep" "wait_for_public_access_block" {
+  count           = var.bucket_policy != null ? 1 : 0
+  depends_on      = [aws_s3_bucket_public_access_block.this]
+  create_duration = "10s"
+}
+
 # S3 Bucket Policy
 resource "aws_s3_bucket_policy" "this" {
   count  = var.bucket_policy != null ? 1 : 0
   bucket = aws_s3_bucket.this.id
   policy = var.bucket_policy
+
+  # Ensure public access block is configured first and wait for it to take effect
+  depends_on = [time_sleep.wait_for_public_access_block]
 }
 
 # S3 Bucket Notification
