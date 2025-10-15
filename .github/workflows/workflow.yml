@@ -27,6 +27,10 @@ on:
 jobs:
   deploy:
     name: Deploy Infrastructure
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
     uses: driveops-surya/devops-reusable-workflows/.github/workflows/environment-stages.yml@main
     with:
       action: ${{ inputs.action }}
