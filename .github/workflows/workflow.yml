@@ -32,4 +32,6 @@ jobs:
       id-token: write
       pull-requests: write
     uses: driveops-surya/devops-reusable-workflows/.github/workflows/environment-stages.yml@main
+    with:
+      action: ${{ inputs.action }}
     secrets: inherit
