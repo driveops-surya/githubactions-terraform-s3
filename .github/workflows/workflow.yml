@@ -1,4 +1,4 @@
-name: Terraform Deployment Pipeline
+name: TerraformDeploymentPipeline
 
 on:
   workflow_dispatch:
@@ -27,9 +27,11 @@ on:
 jobs:
   deploy:
     name: Deploy Infrastructure
-    uses: driveops-surya/devops-reusable-workflows/.github/workflows/environment-stages.yml
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    uses: driveops-surya/devops-reusable-workflows/.github/workflows/environment-stages.yml@main
     with:
-      action: ${{ github.event.inputs.action || 'plan' }}
-      environment: ${{ github.event.inputs.environment || 'dev' }}
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      action: ${{ inputs.action }}
+    secrets: inherit
