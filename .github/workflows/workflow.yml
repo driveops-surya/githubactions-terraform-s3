@@ -31,5 +31,4 @@ jobs:
     with:
       action: ${{ inputs.action }}
       environment: ${{ inputs.environment }}
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    secrets: inherit
