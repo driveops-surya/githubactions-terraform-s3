@@ -1,4 +1,4 @@
-name: Terraform Deployment Pipeline
+name: Terraform-Deployment Pipeline
 
 on:
   workflow_dispatch:
