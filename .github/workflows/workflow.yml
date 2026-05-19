@@ -34,4 +34,5 @@ jobs:
     uses: driveops-surya/devops-reusable-workflows/.github/workflows/environment-stages.yml@main
     with:
       action: ${{ inputs.action }}
+      account_id: ${{ vars.ACCOUNT_ID }}
     secrets: inherit
