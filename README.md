@@ -1,5 +1,7 @@
 # AWS S3 Terraform Module with GitHub Actions
 
+![AWS S3 Terraform Module](docs/pipeline-architecture.jpeg)
+
 This repository contains a comprehensive, reusable Terraform module for creating and managing AWS S3 buckets with best practices for security, lifecycle management, and automation via GitHub Actions.
 
 ## Features
