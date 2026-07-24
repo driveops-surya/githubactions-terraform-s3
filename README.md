@@ -1,4 +1,4 @@
-# AWS S3 Terraform Module with GitHub Actions
+# AWS - S3 Terraform Module with GitHub Actions
 
 ![AWS S3 Terraform Module](docs/pipeline-architecture.jpeg)
 
